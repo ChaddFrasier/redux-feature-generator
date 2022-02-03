@@ -1,0 +1,29 @@
+{
+  "name": "redux-feature-generator",
+  "version": "0.0.1",
+  "description": "Generate redux features including their folders and files that follow the template set by the `react-app --template redux-typescript` API",
+  "main": "index.js",
+  "scripts": {
+    "test": "yarn test",
+    "build": "npx tsc",
+    "example-gen": "node ./build/cli.js generate-feature componentName --template redux-typescript"
+  },
+  "bin": {
+    "generate-feature": "./cli.js"
+  },
+  "keywords": [
+    "redux-feature",
+    "features",
+    "feature",
+    "generate",
+    "generator"
+  ],
+  "author": "ChaddFrasier",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^17.0.14",
+    "@types/yargs": "^17.0.8",
+    "typescript": "^4.5.5",
+    "yargs": "^17.3.1"
+  }
+}
