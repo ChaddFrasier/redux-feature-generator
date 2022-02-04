@@ -1,8 +1,8 @@
 {
   "name": "redux-feature-generator",
-  "version": "0.0.2-rc.1",
+  "version": "0.0.2-rc.2",
   "description": "Generate redux features including their folders and files that follow the template set by the `react-app --template redux-typescript` API",
-  "main": "command.js",
+  "main": "dist/command.js",
   "scripts": {
     "test": "yarn test",
     "build": "tsc",
@@ -10,7 +10,7 @@
     "hello": "node . componentName -t redux-typescript"
   },
   "bin": {
-    "redux-feature-generator": "./dist/cli.js"
+    "redux-feature-generator": "dist/cli.js"
   },
   "files": [
     "/dist/*.js",
