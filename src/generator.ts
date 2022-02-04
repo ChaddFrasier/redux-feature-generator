@@ -1,21 +1,33 @@
-import { CommandOptions } from "./types/generator"
-import { Arguments, CommandBuilder } from 'yargs';
+/**
+ * 
+ */
+export class generator {
+    private projectDir: string;
+    private componentName: string;
+    private template: string;
+    constructor(options: {componentName: string, template: string}){
+        // default the project folder to the currently running folder
+        this.projectDir = process.cwd();
+        this.componentName = options['componentName'];
+        this.componentName = options['template'];
+        return this;
+    }
 
-export const command: string = 'generate-feature <name>';
-export const desc: string = 'THIS DESCRIPTION IS USED IN HELP';
+    private getProjectDir = (): string => {
+        return this.projectDir;
+    };
 
-export const builder: CommandBuilder<CommandOptions, CommandOptions> = (yargs) =>
-  yargs
-    .positional('name', { type: 'string', demandOption: true })
-    .options({
-      template: { type: "string" },
-    });
+    private setProjectDir = (path: string): GENERATOR_STATUS => {
+        return GENERATOR_STATUS.OK;
+    };
 
-export const handler = (argv: Arguments<CommandOptions>): void => {
-  const { name, template } = argv;
-  console.log(`Hello World! ${name}`);
-  console.log(`Recieved! ${template}`);
-  process.stdout.write(`Hello World! ${name}`);
-  process.stdout.write(`Recieved! ${template}`);
-  process.exit(0);
+    public test = () => {
+        return "HELLO WORLD!";
+    }
 };
+
+const enum GENERATOR_STATUS {
+    OK,
+    LOAD,
+    FAIL
+}
