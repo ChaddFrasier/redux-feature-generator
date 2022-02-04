@@ -15,7 +15,7 @@ const yargs_obj =  yargs
     };
     const generatorObj = new generator(options);
     // run the generator class
-    console.log(generatorObj.test())
+    console.log(generatorObj.getAPI().test())
   }catch(e){
     console.log(e);
   }

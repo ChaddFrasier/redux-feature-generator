@@ -5,19 +5,25 @@
   "main": "./dist/cli.js",
   "scripts": {
     "test": "yarn test",
-    "build": "npx tsc",
-    "test:gen": "generate-feature componentName --template redux-typescript"
+    "build": "tsc",
+    "test:gen": "node generate-feature componentName --template redux-typescript",
+    "hello": "node . componentName -t redux-typescript"
   },
   "bin": {
     "generate-feature": "./dist/cli.js"
   },
+  "files": ["/dist/*.js", "/dist/types"],
   "keywords": [],
-  "author": "ChaddFrasier",
+  "author": "chaddfrasier",
   "license": "GPL-3.0",
   "devDependencies": {
     "@types/node": "^17.0.14",
     "@types/yargs": "^17.0.8",
     "typescript": "^4.5.5",
     "yargs": "^17.3.1"
+  },
+  "repository": {
+    "url": "https://github.com/ChaddFrasier/redux-feature-generator",
+    "type": "git"
   }
 }
