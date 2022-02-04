@@ -1,6 +1,6 @@
 {
   "name": "redux-feature-generator",
-  "version": "0.0.2",
+  "version": "0.0.2-rc.1",
   "description": "Generate redux features including their folders and files that follow the template set by the `react-app --template redux-typescript` API",
   "main": "command.js",
   "scripts": {
