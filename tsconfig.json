@@ -1,17 +1,14 @@
 {
-  "compilerOptions": {
-    /* Visit https://aka.ms/tsconfig.json to read more about this file */
-
-    "module": "commonjs",
-    "allowJs": true,
-    "target": "es2020",
-    "types": ["node"],
-    "declaration": true,
-    "declarationMap": true,
-    "declarationDir": "./dist/types",
-    "outDir": "./dist"
-  },
-  "include": [
-    "src/**/*",
-  ]
-}
+    "compilerOptions": {
+      "target": "es5",
+      "module": "commonjs",
+      "lib": ["es6"],
+      "allowJs": true,
+      "outDir": "build",
+      "rootDir": "src",
+      "strict": true,
+      "noImplicitAny": true,
+      "esModuleInterop": true,
+      "resolveJsonModule": true
+    }
+  }

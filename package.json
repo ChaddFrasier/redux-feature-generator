@@ -1,32 +1,35 @@
 {
   "name": "redux-feature-generator",
-  "version": "0.0.2-rc.2",
-  "description": "Generate redux features including their folders and files that follow the template set by the `react-app --template redux-typescript` API",
-  "main": "dist/command.js",
-  "scripts": {
-    "test": "yarn test",
-    "build": "tsc",
-    "test:gen": "node redux-feature-generator componentName --template redux-typescript",
-    "hello": "node . componentName -t redux-typescript"
-  },
-  "bin": {
-    "redux-feature-generator": "dist/cli.js"
-  },
+  "version": "0.0.4",
+  "description": "Generate Redux feature code from the command line",
+  "main": "build/cli.js",
   "files": [
-    "/dist/*.js",
-    "/dist/types"
+    "build/*"
   ],
-  "keywords": [],
-  "author": "chaddfrasier",
-  "license": "GPL-3.0",
-  "devDependencies": {
-    "@types/node": "^17.0.14",
-    "@types/yargs": "^17.0.8",
-    "typescript": "^4.5.5",
-    "yargs": "^17.3.1"
+  "scripts": {
+    "test": "node build/cli.js customName --template redux-typescript",
+    "build": "npx tsc",
+    "build:test": "npm run build && node build/cli.js",
+    "start": "node build/cli.js"
   },
   "repository": {
-    "url": "https://github.com/ChaddFrasier/redux-feature-generator",
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/ChaddFrasier/redux-feature-generator.git"
+  },
+  "author": "chaddfrasier",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/ChaddFrasier/redux-feature-generator/issues"
+  },
+  "homepage": "https://github.com/ChaddFrasier/redux-feature-generator#readme",
+  "bin": {
+    "generate-feature": "build/cli.js"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.15",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "minimist": "^1.2.5"
   }
 }
