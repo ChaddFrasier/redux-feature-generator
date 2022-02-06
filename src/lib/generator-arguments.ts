@@ -1,25 +1,14 @@
-import { isArgumentsObject } from "util/types";
+import {dispatchGenerator, GEN_STATUS, GeneratorConfig} from "./generator";
 
-/**
- * A file is the handler for the argument array of the commmand line
- */
 const GeneratorLanguages = ["JAVASCRIPT", "TYPESCRIPT"];
 const GeneratorFrames = ["REDUX", "REACT"];
-const NameRegExp = /^([A-Z][1-9][\-])*/
-declare type GeneratorConfig = {
-    lang: string,
-    frame: string,
-    name: string
-}
-
-const GeneratorConfig: GeneratorConfig = {
-    lang: "",
-    frame: "",
-    name: ""
-}
-
+const NameRegExp = /^([A-Z][1-9][\-])*/;
 export const handleGeneratorArguments = (args: any) => {
-
+    const GeneratorConfig: GeneratorConfig = {
+        lang: "",
+        frame: "",
+        name: ""
+    }
     try {
         GeneratorConfig.lang = args.template?.split("-")[1].toUpperCase();
         GeneratorConfig.frame = args.template?.split("-")[0].toUpperCase();
@@ -32,9 +21,9 @@ export const handleGeneratorArguments = (args: any) => {
         && GeneratorFrames.includes(GeneratorConfig.frame)
         && NameRegExp.test(GeneratorConfig.name)
     ){
-        console.log("Hello World");
+        return dispatchGenerator(GeneratorConfig);
     } else {
-        return SyntaxError;
+        return GEN_STATUS.FAILURE;
     }
 
 };
