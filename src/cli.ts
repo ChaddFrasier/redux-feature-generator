@@ -1,14 +1,13 @@
 #!/usr/bin/env node
-import { handleGeneratorArguments } from "./lib/arguments";
+import { handleGeneratorArguments } from "./lib/generator-arguments";
+import { GEN_STATUS } from "./lib/generator";
 const argv = require('minimist')(process.argv.slice(2));
-/* TODO: Handle a success and an error runs
-    Success => Display the file paths in console that were written
-    Failure => Print the message that corresponds to the error code
-*/
-const status = handleGeneratorArguments(argv);
-
+const status: GEN_STATUS = handleGeneratorArguments(argv);
 switch(status) {
-    case SyntaxError:
-        // Users input was incorrectly formatted
+    case GEN_STATUS.SUCCESS:
+        // TODO: Print out information for the user
+        break;
+    case GEN_STATUS.FAILURE:
         console.log("Usage:     generate-feature <customName> --template <framework>-<langauge>");
+        break;
 }
