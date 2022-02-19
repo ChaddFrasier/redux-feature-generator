@@ -2,16 +2,17 @@
   "name": "redux-feature-generator",
   "version": "0.0.4",
   "description": "Generate Redux feature code from the command line",
-  "main": "build/cli.js",
+  "main": "build/src/cli.js",
   "files": [
-    "build/*"
+    "build/*",
+    "templates/*"
   ],
   "scripts": {
-    "test": "node build/cli.js customName --template redux-typescript",
+    "test": "node build/src/cli.js customName --template redux-typescript",
     "test:failure:1": "node build/cli.js customName --template x-typescript",
     "build": "npx tsc",
     "build:test": "npm run build && node build/cli.js",
-    "start": "node build/cli.js"
+    "start": "node build/src/cli.js"
   },
   "repository": {
     "type": "git",
@@ -24,10 +25,13 @@
   },
   "homepage": "https://github.com/ChaddFrasier/redux-feature-generator#readme",
   "bin": {
-    "generate-feature": "build/cli.js"
+    "generate-feature": "build/src/cli.js"
   },
   "devDependencies": {
     "@types/node": "^17.0.15",
+    "del": "^6.0.0",
+    "gulp": "^4.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "typescript": "^4.5.5"
   },
   "dependencies": {

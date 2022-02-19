@@ -7,7 +7,8 @@ export const handleGeneratorArguments = (args: any) => {
     const GeneratorConfig: GeneratorConfig = {
         lang: "",
         frame: "",
-        name: ""
+        name: "",
+        projectPath: "test/src/feature/counter"
     }
     try {
         GeneratorConfig.lang = args.template?.split("-")[1].toUpperCase();
@@ -25,5 +26,4 @@ export const handleGeneratorArguments = (args: any) => {
     } else {
         return GEN_STATUS.FAILURE;
     }
-
 };
