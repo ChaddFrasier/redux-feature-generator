@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
 
-import { fetchLink } from './templateAPI';
+import { fetchLink } from './${featureNameLowercase}API';
 
-export interface templateState {
+export interface ${featureNameLowercase}State {
   status: 'idle' | 'fetching' | 'failed';
 }
 
-const initialState: templateState = {
+const initialState: ${featureNameLowercase}State = {
   status: 'idle',
 };
 
@@ -17,15 +17,15 @@ const initialState: templateState = {
 // code can then be executed and other actions can be dispatched. Thunks are
 // typically used to make async requests.
 export const fetchLinkAsync = createAsyncThunk(
-  'template/fetchLink',
+  '${featureNameLowercase}/fetchLink',
   async (link: string) => {
     const response = await fetchLink(link);
     return response;
   }
 );
 
-export const templateSlice = createSlice({
-  name: 'template',
+export const ${featureNameLowercase}Slice = createSlice({
+  name: '${featureNameLowercase}',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
@@ -54,12 +54,12 @@ export const templateSlice = createSlice({
   },
 });
 
-export const { updateState } = templateSlice.actions;
+export const { updateState } = ${featureNameLowercase}Slice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-export const selectStatus = (state: RootState) => state.template.status;
+export const selectStatus = (state: RootState) => state.${featureNameLowercase}.status;
 
 
-export default templateSlice.reducer;
+export default ${featureNameLowercase}Slice.reducer;

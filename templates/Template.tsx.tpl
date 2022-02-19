@@ -4,15 +4,15 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { 
     fetchLinkAsync,
     selectStatus
-} from './templateSlice';
-import styles from './template.module.css';
+} from './${featureNameLowercase}Slice';
+import styles from './${featureNameLowercase}.module.css';
 
-export interface TemplateProps {
+export interface ${featureNameUppercase}Props {
     name: string
 }
 
 
-export function Template(props: TemplateProps) {
+export function ${featureNameUppercase}(props: ${featureNameUppercase}Props) {
     const status = useAppSelector(selectStatus);
     const dispatch = useAppDispatch();
     return (
