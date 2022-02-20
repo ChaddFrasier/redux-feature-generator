@@ -1,18 +1,17 @@
 {
   "name": "redux-feature-generator",
-  "version": "0.0.4",
+  "version": "0.1.0-rc.1",
   "description": "Generate Redux feature code from the command line",
   "main": "build/src/cli.js",
   "files": [
-    "build/*",
-    "templates/*"
+    "./build/*"
   ],
   "scripts": {
-    "test": "node build/src/cli.js customName --template redux-typescript",
+    "test": "generate-feature customName --template redux-typescript",
     "test:failure:1": "node build/cli.js customName --template x-typescript",
     "build": "gulp",
-    "build:test": "npm run build && node build/cli.js",
-    "start": "node build/src/cli.js"
+    "build:test": "npm run build && npm run test",
+    "start": "generate-feature"
   },
   "repository": {
     "type": "git",
@@ -25,16 +24,18 @@
   },
   "homepage": "https://github.com/ChaddFrasier/redux-feature-generator#readme",
   "bin": {
-    "generate-feature": "build/src/cli.js"
+    "generate-feature": "./bin/cli.js"
   },
+  "preferGlobal": true,
   "devDependencies": {
-    "@types/node": "^17.0.15",
+    "@types/node": "^17.0.18",
+    "@types/yargs": "^17.0.8",
     "del": "^6.0.0",
     "gulp": "^4.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "minimist": "^1.2.5"
+    "yargs": "^17.3.1"
   }
 }

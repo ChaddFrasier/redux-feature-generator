@@ -1,62 +1,49 @@
-import {readFileSync, existsSync, writeFileSync, mkdir, mkdirSync} from 'fs';
-import * as path from 'path';
+import * as fs from 'fs'
+import * as path from 'path'
 
-export enum GEN_STATUS {
-    SUCCESS=0,
-    FAILURE
+export const dispatch = (cfg: any) => {
+
+    const templates = [
+        path.resolve("templates/basic-typescript/template.module.css.tpl"),
+        path.resolve("templates/basic-typescript/template.spec.ts.tpl"),
+        path.resolve("templates/basic-typescript/Template.tsx.tpl"),
+        path.resolve("templates/basic-typescript/templateAPI.ts.tpl"),
+        path.resolve("templates/basic-typescript/templateSlice.ts.tpl")
+    ]
+    const outFiles = [
+        path.join(`${cfg.projectPath}/${cfg.featureName}/${cfg.featureName}.module.css`),
+        path.join(`${cfg.projectPath}/${cfg.featureName}/${cfg.featureName}.spec.ts`),
+        path.join(`${cfg.projectPath}/${cfg.featureName}/${cfg.featureNameUpperCase}.tsx`),
+        path.join(`${cfg.projectPath}/${cfg.featureName}/${cfg.featureName}API.ts`),
+        path.join(`${cfg.projectPath}/${cfg.featureName}/${cfg.featureName}Slice.ts`)
+    ]
+    
+
+    for(let i = 0; i < templates.length; i++) {
+        if(fs.existsSync(path.resolve(templates[i]))) {
+            let fileBuf = fs.readFileSync(templates[i], {encoding: "utf-8"})
+
+            fileBuf = replaceAll(
+                replaceAll(fileBuf, "${featureNameUppercase}", cfg.featureNameUpperCase),
+                "${featureNameLowercase}", cfg.featureName)
+            // Make sure the generation will work
+            if(!fs.existsSync(path.join(`${cfg.projectPath}/${cfg.featureName}/`))) {
+                fs.mkdirSync(path.join(`${cfg.projectPath}/${cfg.featureName}/`));
+            }
+            fs.writeFileSync(outFiles[i], fileBuf, {encoding: "utf-8", flag: "w"});
+        }
+    }
 }
-export declare type GeneratorConfig = {
-    lang: string,
-    frame: string,
-    name: string,
-    Cname: string,
-    projectPath: string
+
+export const capitalize = (string: string): string => {
+    return string[0].toUpperCase() + string.substring(1)
+}
+
+export const lowercase = (string: string): string => {
+    return string[0].toLowerCase() + string.substring(1)
 }
 
 function replaceAll(str: string, find: string, replace: string): string {
     var escapedFind=find.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
     return str.replace(new RegExp(escapedFind, 'g'), replace);
-}
-
-export const dispatchGenerator = async (config: GeneratorConfig): Promise<GEN_STATUS> => {
-    return new Promise(resolve => {
-        console.log( new Date().getTime() + "Generation Dispatched")
-        const files: string[] = [
-            `${config.name}.module.css`,
-            `${config.name}.spec.ts`,
-            `${config.name}API.ts`,
-            `${config.Cname}.tsx`,
-            `${config.name}Slice.ts`
-        ];
-
-        const templates: string[] = [
-            `template.module.css.tpl`,
-            `template.spec.ts.tpl`,
-            `templateAPI.ts.tpl`,
-            `Template.tsx.tpl`,
-            `templateSlice.ts.tpl`
-        ];
-
-        for(let i = 0; i < templates.length; i++) {
-            const templatePath = path.join(`${__dirname}/../../templates/basic-typescript/${templates[i]}`);
-            const outFolderPath = path.join(__dirname, config.projectPath);
-            const outPath = path.join(__dirname, config.projectPath, files[i]);
-            if(existsSync(templatePath)) {
-
-                if(!existsSync(outFolderPath)) {
-                    mkdirSync(outFolderPath);
-                }
-
-                let fileBuffer = readFileSync(templatePath, {encoding: 'utf-8'})
-                fileBuffer = replaceAll(fileBuffer, "${featureNameLowercase}", config.name)
-                fileBuffer = replaceAll(fileBuffer, "${featureNameUppercase}", config.Cname)
-                writeFileSync(outPath, fileBuffer, {encoding: 'utf-8', flag: "w+"});
-            } else {
-                console.log("Could Not find all templates needed by generator");
-                resolve(GEN_STATUS.FAILURE)
-            }
-        }
-
-        resolve(GEN_STATUS.SUCCESS)
-    });
 }
