@@ -23,3 +23,17 @@ export const generateContextHelp = () => {
         );
     return helpString;
 }
+
+export const readArgs = (argsv: string[]) => {
+    const name = argsv[0] ?? "NOT FOUND";
+    const templatekey = argsv[1] ?? undefined;
+    const template = argsv[2] ?? undefined;
+
+    if(name != "NOT FOUND") {
+        if( templatekey != undefined && templatekey == '--template') {
+            if( ['redux-typescript'].includes(template)) {
+    
+            }
+        }
+    }
+}

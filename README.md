@@ -18,8 +18,8 @@ Writing File: C:\Users\chadd\Documents\VSCode\Apps\pie2\src\features\myfeature\m
 Writing File: C:\Users\chadd\Documents\VSCode\Apps\pie2\src\features\myfeature\myfeatureSlice.ts
 ```
 
-## Stable Releases
-* 1.0.0       First working global CLI implementation
+## Stable Releases       
+* 1.0.1       First working global CLI implementation; bug fixes
 
 ## Testing Releases
 * 0.1.1-rc.3  Command line argument parsing done by hand

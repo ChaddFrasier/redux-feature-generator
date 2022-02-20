@@ -1,17 +1,19 @@
 #!/usr/bin/env node
 import  * as fs from "fs";
-import path from 'path'
-import { generateContextHelp, capitalize, lowercase, replaceAll } from "./lib/helpers"
+import path from 'path';
+import { generateContextHelp, capitalize, lowercase, replaceAll } from "./lib/helpers";
 
-const GeneratorTemplates = ["redux-typescript", "redux-javascript"]
-const NAME_VALIDATOR = /\w*\W*/;
-const argv = process.argv.splice(process.execArgv.length + 2)
+const GeneratorTemplates = ["redux-typescript", "redux-javascript"];
+const NAME_VALIDATOR = /^[^*|\":<>[\]{}`\\()0-9\-';@&$]+$/;
+const argv = process.argv.splice(process.execArgv.length + 2);
 
 if(argv.length === 1 && ['-h', '--help'].includes(argv[0])) {
     process.stdout.write(generateContextHelp())
+    process.exit(0);
 }
 else if(argv.length === 0 || argv.length > 3) {
     process.stdout.write(`Argument Error:\n ${generateContextHelp()}`);
+    process.exit(0);
 }
 else {
     let CONFIG = {
@@ -23,23 +25,24 @@ else {
     process.stdout.write("\nValidating Input ...\n")
 
     // Custom Name should be position 1
-    if(NAME_VALIDATOR.test(argv[0])) {
+    if(NAME_VALIDATOR.test(argv[0])) {  
         CONFIG.featureName = lowercase(argv[0]);
         CONFIG.featureNameUpperCase = capitalize(argv[0]);
     }else {
-        process.stderr.write("Naming Convention Error: You need to input a name that could be accpeted as a file location");
+        process.stdout.write("Naming Convention Error: You need to input a name that could be accpeted as a file location");
+        process.exit(0);
     }
 
     if(argv[1] === "--template") {
         if(GeneratorTemplates.includes(argv[2])) {
             CONFIG.template = argv[2];
         } else {
-            process.stderr.write("Template Error: Accepted template codes include 'redux-typescript'")
+            process.stdout.write("Template Error: Accepted template codes include 'redux-typescript'")
+            process.exit(0);
         }
     }
 
     process.stdout.write("Validating Input Succeeded\n")
-
 
     const templates = [
         path.resolve(__dirname, "templates/basic-typescript/template.module.css.tpl"),
@@ -77,7 +80,6 @@ else {
                 }
             }
         }
-
         process.stdout.write("Generation Succeeded\n")
     }
     process.exit(0);
