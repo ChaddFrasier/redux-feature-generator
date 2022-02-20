@@ -1,29 +1,24 @@
 # redux-feature-generator
-Generate redux feature code with the npm command line. Eventually this library will be capable of gnerating code files in JavaScript or TypeScript in various frameworks including React, and Redux.
+Generate redux feature code with the npm command line. Eventually this library will be capable of generating code files in JavaScript or TypeScript in various frameworks including React, and Redux.
 
 ## Installation
 `npm install -g redux-feature-generator`
 
 ## Usage
-```{bash}
-cd <my/redux/project>
-generate-feature myFeature --template redux-typescript
-```
+`generate-feature <featureName>`
 
-## Success
+## Example
 ```
-> generate-feature customName --template redux-typescript
->
-> C:\Users\chadd\Documents\VSCode\Libraries\redux-feature-generator
-> Generated Files:
-> C:\Users\chadd\Documents\VSCode\Libraries\redux-feature-generator\customName\customName.module.css
-> C:\Users\chadd\Documents\VSCode\Libraries\redux-feature-generator\customName\customName.spec.ts
-> C:\Users\chadd\Documents\VSCode\Libraries\redux-feature-generator\customName\CustomName.tsx
-> C:\Users\chadd\Documents\VSCode\Libraries\redux-feature-generator\customName\customNameAPI.ts
-> C:\Users\chadd\Documents\VSCode\Libraries\redux-feature-generator\customName\customNameSlice.ts
-> Arguments Parsed Successfully
+$ cd ./VSCode/Apps/pie2
+$ generate-feature myfeature
+Writing File: C:\Users\chadd\Documents\VSCode\Apps\pie2\src\features\myfeature\myfeature.module.css
+Writing File: C:\Users\chadd\Documents\VSCode\Apps\pie2\src\features\myfeature\myfeature.spec.ts
+Writing File: C:\Users\chadd\Documents\VSCode\Apps\pie2\src\features\myfeature\Myfeature.tsx
+Writing File: C:\Users\chadd\Documents\VSCode\Apps\pie2\src\features\myfeature\myfeatureAPI.ts
+Writing File: C:\Users\chadd\Documents\VSCode\Apps\pie2\src\features\myfeature\myfeatureSlice.ts
 ```
 
 ## Stable Releases
-0.1.1-rc.3 Command line argument parsing done by hand
-0.0.3 Hello World
+1.0.0       First working global CLI implementation
+0.1.1-rc.3  Command line argument parsing done by hand
+0.0.3       Hello World

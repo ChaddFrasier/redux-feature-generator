@@ -15,9 +15,10 @@ export const generateContextHelp = () => {
     let helpString = "";
     helpString = "redux-feature-generator:\t\tA simple command line tool to speed up the time it takes to setup a new redux feature.\n\n";
     helpString = helpString.concat(
-        "\t-h --help\t\t\t\tPrint command help.\n",
-        "\tcustomeName\t\t\t\tThe name of your new feature.\n",
-        "\toutPath\t\t\t\t\tThe path that the generated files will be placed.\n",
+        "\tUsage:\t\tgenerate-feature <featureName> [--template redux-typescript]\n\n",
+        "\t-h --help\t\t\tPrint command help.\n",
+        "\tcustomeName\t\t\tThe name of your new feature.\n",
+        "\toutPath\t\t\t\tThe path that the generated files will be placed.\n",
         "\t--template <template>\t\tThe template structure you would like use for generation.\n\n"
         );
     return helpString;
