@@ -1,18 +1,19 @@
 {
   "name": "redux-feature-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generate Redux feature code from the command line",
   "main": "build/cli.js",
   "files": [
     "build/**/*"
   ],
   "scripts": {
-    "test": "npm run start customName --template redux-typescript",
-    "test:failure:1": "node build/cli.js customName --template x-typescript",
+    "test": "node build/cli.js customName --template redux-typescript",
+    "test:template:fail": "node build/cli.js customName --template x-typescript",
+    "test:name:fail:1": "node build/cli.js customName012",
+    "test:name:fail:2": "node build/cli.js customNam-sdfs",
     "build": "gulp",
     "build:test": "npm run build && npm run test",
-    "start": "node build/cli.js",
-    "release": "cp package.json build && npm"
+    "start": "node build/cli.js"
   },
   "repository": {
     "type": "git",
