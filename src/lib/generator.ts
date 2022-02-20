@@ -3,7 +3,7 @@ import * as path from 'path'
 import { replaceAll } from './helpers';
 
 export const dispatch = (cfg: any): Promise<string[]> => {
-    return new Promise(resolve => {
+    return new Promise( async resolve => {
         const templates = [
             path.resolve("templates/basic-typescript/template.module.css.tpl"),
             path.resolve("templates/basic-typescript/template.spec.ts.tpl"),
@@ -30,11 +30,12 @@ export const dispatch = (cfg: any): Promise<string[]> => {
                 // Make sure the generation will work
                 if(!fs.existsSync(path.join(`${cfg.projectPath}/${cfg.featureName}/`))) {
                     fs.mkdirSync(path.join(`${cfg.projectPath}/${cfg.featureName}/`));
+                    fs.writeFileSync(outFiles[i], fileBuf, {encoding: "utf-8", flag: "w"});
+                } else {
+                    fs.writeFileSync(outFiles[i], fileBuf, {encoding: "utf-8", flag: "w"});
                 }
-                fs.writeFileSync(outFiles[i], fileBuf, {encoding: "utf-8", flag: "w"});
             }
         }
-
         resolve(outFiles)
     });
 }

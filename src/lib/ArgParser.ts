@@ -16,7 +16,7 @@ const GeneratorTemplates = ["redux-typescript", "redux-javascript"]
 const NAME_VALIDATOR = /\w*\W*/;
 
 export const ArgParser = (argv: string[]): Promise<ARG_PARSER_STATUS> => {
-    return new Promise<ARG_PARSER_STATUS>(resolve => {
+    return new Promise<ARG_PARSER_STATUS>( async resolve => {
         if(argv.length === 1 && ['-h', '--help'].includes(argv[0])) {
             resolve(ARG_PARSER_STATUS.HELP);
         }
@@ -24,13 +24,10 @@ export const ArgParser = (argv: string[]): Promise<ARG_PARSER_STATUS> => {
             resolve(ARG_PARSER_STATUS.ARGERROR);
         }
         else {
-
-            console.log(process.cwd())
-    
             let CONFIG = {
                 featureNameUpperCase: "",
                 featureName: "",
-                projectPath: process.cwd(),
+                projectPath: `${process.cwd()}/src/features`,
                 template: ""
             }
     
@@ -51,8 +48,8 @@ export const ArgParser = (argv: string[]): Promise<ARG_PARSER_STATUS> => {
                 }
             }
     
-            dispatch(CONFIG).then(files => {
-                console.log(`Printed Files: ${replaceAll(files.toString(), ',', '\n')}`)
+            await dispatch(CONFIG).then(files => {
+                console.log(`Generated Files: \n${replaceAll(files.toString(), ',', '\n')}`)
                 resolve(ARG_PARSER_STATUS.SUCCESS)
             })
         }

@@ -15,7 +15,8 @@ generate-feature myFeature --template redux-typescript
 > generate-feature customName --template redux-typescript
 >
 > C:\Users\chadd\Documents\VSCode\Libraries\redux-feature-generator
-> Printed Files: C:\Users\chadd\Documents\VSCode\Libraries\redux-feature-generator\customName\customName.module.css
+> Generated Files:
+> C:\Users\chadd\Documents\VSCode\Libraries\redux-feature-generator\customName\customName.module.css
 > C:\Users\chadd\Documents\VSCode\Libraries\redux-feature-generator\customName\customName.spec.ts
 > C:\Users\chadd\Documents\VSCode\Libraries\redux-feature-generator\customName\CustomName.tsx
 > C:\Users\chadd\Documents\VSCode\Libraries\redux-feature-generator\customName\customNameAPI.ts
