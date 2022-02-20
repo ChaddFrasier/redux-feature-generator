@@ -3,15 +3,16 @@ Generate redux feature code with the npm command line. Eventually this library w
 
 ## Installation
 `npm install -G redux-feature-generator`
+
 or
+
 `yarn global add redux-feature-generator`
 
 ## Usage
 ```{bash}
-cd <project/home/folder>
-generate-feature myFeature --template redux-typescript
+generate-feature myFeature ./myproject --template redux-typescript
 ```
 
 ## Stable Releases
-1.0.0 redux-typescript mode added
+0.1.0-rc.1 redux-typescript mode added for testing puposes not released yet
 0.0.3 Hello World
