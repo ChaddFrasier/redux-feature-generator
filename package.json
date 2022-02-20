@@ -10,7 +10,7 @@
   "scripts": {
     "test": "node build/src/cli.js customName --template redux-typescript",
     "test:failure:1": "node build/cli.js customName --template x-typescript",
-    "build": "npx tsc",
+    "build": "gulp",
     "build:test": "npm run build && node build/cli.js",
     "start": "node build/src/cli.js"
   },

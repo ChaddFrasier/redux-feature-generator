@@ -9,14 +9,17 @@ var files = [
 ];
 
 function clean () {
+  console.log("Cleaning Build Folder")
   return del('build/**', {force:true});
 }
 
 function distribute() {
+  console.log("Templates Copied")
   return gulp.src(files , { base: './' }).pipe(gulp.dest('build'));
 }
 
 function build() {
+  console.log("Compilation Finished")
   return tsProject.src().pipe(tsProject()).js.pipe(gulp.dest("build"));
 }
 
