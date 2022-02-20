@@ -19,6 +19,8 @@ Writing File: C:\Users\chadd\Documents\VSCode\Apps\pie2\src\features\myfeature\m
 ```
 
 ## Stable Releases
-1.0.0       First working global CLI implementation
-0.1.1-rc.3  Command line argument parsing done by hand
-0.0.3       Hello World
+* 1.0.0       First working global CLI implementation
+
+## Testing Releases
+* 0.1.1-rc.3  Command line argument parsing done by hand
+* 0.0.3       Hello World
