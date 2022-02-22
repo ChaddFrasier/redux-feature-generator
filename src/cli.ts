@@ -11,6 +11,11 @@ if(argv.length === 1 && ['-h', '--help'].includes(argv[0])) {
     process.stdout.write(generateContextHelp())
     process.exit(0);
 }
+else if(argv.length === 1 && ['-v', '--version'].includes(argv[0])) {
+    const cfg = require("../package.json");
+    process.stdout.write(`redux-feature-generator: v${cfg.version}`)
+    process.exit(0);
+}
 else if(argv.length === 0 || argv.length > 3) {
     process.stdout.write(`Argument Error:\n ${generateContextHelp()}`);
     process.exit(0);
