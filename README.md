@@ -4,6 +4,9 @@ Generate redux feature code with the npm command line. Eventually this library w
 ## Installation
 `npm install -g redux-feature-generator`
 
+## Check Installation
+`generate-feature -v`
+
 ## Usage
 `generate-feature <featureName>`
 
@@ -18,8 +21,9 @@ Writing File: C:\Users\chadd\Documents\VSCode\Apps\pie2\src\features\myfeature\m
 Writing File: C:\Users\chadd\Documents\VSCode\Apps\pie2\src\features\myfeature\myfeatureSlice.ts
 ```
 
-## Stable Releases       
-* 1.0.1       First working global CLI implementation; bug fixes
+## Stable Releases
+* 1.1.0         Added version command option for testing install
+* 1.0.1         First working global CLI implementation; bug fixes
 
 ## Testing Releases
 * 0.1.1-rc.3  Command line argument parsing done by hand
