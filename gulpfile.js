@@ -25,4 +25,4 @@ function build() {
 }
 
 exports.build = build;
-exports.default = series(clean, distribute ,build);
+exports.default = series(clean, distribute, build);
