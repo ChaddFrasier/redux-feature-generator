@@ -16,7 +16,7 @@ function clean () {
 
 function distribute() {
   console.log("Templates Copied")
-  return gulp.src(copyFiles , { base: './' }).pipe(gulp.dest('build'));
+  return gulp.src(copyFiles, { base: './' }).pipe(gulp.dest('build'));
 }
 
 function build() {
