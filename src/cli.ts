@@ -1,25 +1,30 @@
 #!/usr/bin/env node
-import  * as fs from "fs";
+import  * as fs from 'fs';
 import path from 'path';
-import { generateContextHelp, capitalize, lowercase, replaceAll } from "./lib/helpers";
+import { capitalize, lowercase, replaceAll } from "./lib/helpers";
 
-const GeneratorTemplates = ["redux-typescript", "redux-javascript"];
-const NAME_VALIDATOR = /^[^*|\":<>[\]{}`\\()0-9\-';@&$]+$/;
-const argv = process.argv.splice(process.execArgv.length + 2);
+import { dispatch } from './lib/rfg';
+import { rfgArgs, RFG_STATUS } from './lib/rfgArgs';
 
-if(argv.length === 1 && ['-h', '--help'].includes(argv[0])) {
-    process.stdout.write(generateContextHelp())
-    process.exit(0);
+const args = rfgArgs.read(process.argv.splice(process.execArgv.length + 2));
+
+switch(args.status) {
+    case RFG_STATUS.HELP:
+        console.log(rfgArgs.help());
+        process.exit(0);
+    case RFG_STATUS.VERSION:
+        console.log(rfgArgs.version(require("../package.json")));
+        process.exit(0);
+    case RFG_STATUS.ERROR:
+        console.log(`Argument Error:\n ${rfgArgs.help()}`);
+        process.exit(2);
+    case RFG_STATUS.GO:
+        console.log(dispatch(args.argv));
+        process.exit(0);
+    default:
+        process.exit(1);
 }
-else if(argv.length === 1 && ['-v', '--version'].includes(argv[0])) {
-    const cfg = require("../package.json");
-    process.stdout.write(`redux-feature-generator: v${cfg.version}`)
-    process.exit(0);
-}
-else if(argv.length === 0 || argv.length > 3) {
-    process.stdout.write(`Argument Error:\n ${generateContextHelp()}`);
-    process.exit(0);
-}
+/* 
 else {
     let CONFIG = {
         featureNameUpperCase: "",
@@ -88,4 +93,4 @@ else {
         process.stdout.write("Generation Succeeded\n")
     }
     process.exit(0);
-}
+} */
