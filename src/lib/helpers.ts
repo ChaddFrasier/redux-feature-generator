@@ -1,9 +1,15 @@
-export const capitalize = (string: string): string => {
-    return string[0].toUpperCase() + string.substring(1)
+export const capitalize = (name: string): string => {
+    if(name.length > 0) {
+        return name[0].toUpperCase() + name.substring(1);
+    }
+    return "";
 }
 
-export const lowercase = (string: string): string => {
-    return string[0].toLowerCase() + string.substring(1)
+export const lowercase = (name: string): string => {
+    if(name.length > 0) {
+        return name[0].toLowerCase() + name.substring(1);
+    }
+    return "";
 }
 
 export const replaceAll = (str: string, find: string, replace: string): string => {
