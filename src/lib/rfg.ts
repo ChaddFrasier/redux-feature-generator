@@ -12,7 +12,7 @@ const templates = [
 ]
 
 export const dispatch = (args: any): RFG_STATUS => {
-    const projectDirectory = process.cwd();
+    const projectDirectory = process.cwd() + "/src/features";
 
     
     const outFiles = [

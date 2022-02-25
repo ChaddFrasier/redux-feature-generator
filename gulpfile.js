@@ -6,7 +6,8 @@ var tsProject = ts.createProject("tsconfig.json");
 
 
 var copyFiles = [
-  './templates/**'
+  './templates/**',
+  './package.json'
 ];
 
 function clean () {

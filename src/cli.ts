@@ -13,7 +13,7 @@ switch(args.status) {
         console.log(rfgArgs.help());
         process.exit(0);
     case RFG_STATUS.VERSION:
-        console.log(rfgArgs.version(require("../package.json")));
+        console.log(rfgArgs.version(require("../../package.json")));
         process.exit(0);
     case RFG_STATUS.ERROR:
         console.log(`Argument Error:\n ${rfgArgs.help()}`);
