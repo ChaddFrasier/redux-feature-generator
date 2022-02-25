@@ -68,7 +68,6 @@ const generateHelp = () => {
         "\tcustomeName\t\t\tThe name of your new feature.\n",
         "\t-h --help\t\t\tPrint command help.\n",
         "\t-v --version\t\t\tPrint command help.\n",
-        //"\toutPath\t\t\t\tThe path that the generated files will be placed.\n",
         "\t--template <template>\t\tThe template structure you would like use for generation.\n\n"
         );
     return helpString;
