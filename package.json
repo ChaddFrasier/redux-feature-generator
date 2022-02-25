@@ -2,6 +2,7 @@
   "name": "redux-feature-generator",
   "version": "1.2.0",
   "description": "Generate Redux feature code from the command line",
+  "keywords": ["redux", "feature", "redux-features", "generator", "feature-generator"],
   "main": "build/src/cli.js",
   "files": [
     "build/src/**/*",
@@ -11,6 +12,7 @@
     "test": "jest",
     "build": "gulp",
     "build-and-test": "npm run build && npm run test",
+    "test:gen": "cd ./test && node ../build/src/cli.js testName -t redux-typescript", 
     "start": "node ./build/src/cli.js"
   },
   "repository": "git+https://github.com/ChaddFrasier/redux-feature-generator.git",

@@ -49,7 +49,7 @@ const readArgs = (argv: string[]): ArgumentPayload => {
                     return createStatusPayload(RFG_STATUS.ERROR);
                 }
                 break;
-            case "-z":
+            default:
                 readStatus = RFG_STATUS.ERROR;
                 return createStatusPayload(readStatus);
         }
@@ -57,7 +57,7 @@ const readArgs = (argv: string[]): ArgumentPayload => {
 
     return {
         status: readStatus,
-        argv: ["hellow"]
+        argv: argsArr
     };
 };
 

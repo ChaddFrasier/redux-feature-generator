@@ -22,6 +22,7 @@ Writing File: C:\Users\chadd\Documents\VSCode\Apps\pie2\src\features\myfeature\m
 ```
 
 ## Stable Releases
+* 1.2.0         Added testing to code with no major changes to functionality
 * 1.1.1         Code refactor patch level added unit tests
 * 1.1.0         Added version command option for testing install
 * 1.0.1         First working global CLI implementation; bug fixes

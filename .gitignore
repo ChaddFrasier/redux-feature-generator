@@ -105,4 +105,4 @@ dist
 
 # Build info for typescript
 build/
-test/src/
+test/src/*

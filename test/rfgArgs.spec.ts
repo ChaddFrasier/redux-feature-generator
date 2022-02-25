@@ -34,10 +34,15 @@ describe("Testing Command Handler", () => {
     it("Should pass when argv has ideal input", ()=>{
         expect(rfgArgs.read(helpers.injectCommand("generate-feature customName")).status).toBe(RFG_STATUS.GO);
         expect(rfgArgs.read(helpers.injectCommand("generate-feature customName -t redux-typescript")).status).toBe(RFG_STATUS.GO);
+        expect(rfgArgs.read(helpers.injectCommand("generate-feature customName -t redux-javascript")).status).toBe(RFG_STATUS.GO);
     });
 
     it("Should fail when argv has wrong flag in input", ()=>{
         expect(rfgArgs.read(helpers.injectCommand("generate-feature customName -z should-fail")).status).toBe(RFG_STATUS.ERROR);
         expect(rfgArgs.read(helpers.injectCommand("generate-feature customName -t should-fail")).status).toBe(RFG_STATUS.ERROR);
+    });
+
+    it("Should fail when argv has wrong flag in input", ()=>{
+        expect(rfgArgs.read(helpers.injectCommand("generate-feature customName should-fail")).status).toBe(RFG_STATUS.ERROR);
     });
 });
