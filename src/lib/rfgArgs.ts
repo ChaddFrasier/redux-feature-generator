@@ -1,60 +1,79 @@
+import * as fs from 'fs'
+import path from 'path';
+import { PassThrough } from 'stream';
 export enum RFG_STATUS {
-    GO=1,
-    HELP,
+    GO=0,
     VERSION,
-    ERROR,
-    NOTSET
+    HELP,
+    ERROR=400,
+    NOTSETERROR,
+    UNKNOWNFLAGERROR,
+    FOLDERNOTFOUND,
+    
 };
 export declare type ArgumentPayload = {
     status: RFG_STATUS,
     argv: string[]
 };
 
-const NAME_VALIDATOR = /^[^*|\":<>[\]{}`\\()0-9\-';@&$]+$/;
+const ARGUMENT_LIMIT = 4
+
 const readArgs = (argv: string[]): ArgumentPayload => {
-    let readStatus: RFG_STATUS = RFG_STATUS.NOTSET;
+    let readStatus: RFG_STATUS = RFG_STATUS.NOTSETERROR;
     const argsArr: string[] = [];
 
     /**
      * Fail on incorrect length of argv
      */
-    if(argv.length === 0 || argv.length >= 4) {
-        readStatus = RFG_STATUS.ERROR
-        return createStatusPayload(readStatus)
+    if(argv.length === 0 || argv.length > ARGUMENT_LIMIT) { 
+        return createStatusPayload(RFG_STATUS.ERROR)
     }
     
     for (let index = 0; index < argv.length; index++) {
         const element = argv[index];
+        let isOption = false;
 
-        if(index === 0 && NAME_VALIDATOR.test(element))
+        if(element[0] == '-') {
+            isOption = true;
+        }
+
+        if(index === 0 && !isOption && /^[^*|\":<>[\]{}`\\()0-9\-';@&$]+$/.test(element))
         {
             argsArr[index] = element;
             readStatus = RFG_STATUS.GO
             continue;
-        }
-        switch(element){
-            case "-h":
-            case "--help":
-                readStatus = RFG_STATUS.HELP;
-                return createStatusPayload(readStatus);
-            case "-v":
-            case "--version":
-                readStatus = RFG_STATUS.VERSION;
-                return createStatusPayload(readStatus);
-            case "-t":
-            case "--template":
-                if(["redux-typescript", "redux-javascript"].includes(argv[++index])){
-                    argsArr[1] = argv[index];
-                } else {
-                    return createStatusPayload(RFG_STATUS.ERROR);
-                }
-                break;
-            default:
-                readStatus = RFG_STATUS.ERROR;
-                return createStatusPayload(readStatus);
+        } else if(index === 1 && !isOption) {
+            if(fs.existsSync(path.join(element))) {
+                argsArr[index] = element;
+                readStatus = RFG_STATUS.GO
+                continue;
+            } else {
+                return createStatusPayload(RFG_STATUS.FOLDERNOTFOUND)
+            }
+            
+        } else if (isOption) {
+            switch(element){
+                case "-h":
+                case "--help":
+                    readStatus = RFG_STATUS.HELP;
+                    return createStatusPayload(readStatus);
+                case "-v":
+                case "--version":
+                    readStatus = RFG_STATUS.VERSION;
+                    return createStatusPayload(readStatus);
+                case "-t":
+                case "--template":
+                    if(["redux-typescript", "redux-javascript"].includes(argv[++index])){
+                        argsArr[1] = argv[index];
+                    } else {
+                        return createStatusPayload(RFG_STATUS.ERROR);
+                    }
+                    break;
+                default:
+                    return createStatusPayload(RFG_STATUS.UNKNOWNFLAGERROR)
+            }
         }
     }
-
     return {
         status: readStatus,
         argv: argsArr
@@ -66,6 +85,7 @@ const generateHelp = () => {
     helpString = helpString.concat(
         "\tUsage:\t\tgenerate-feature <featureName> [--template redux-typescript]\n\n",
         "\tcustomeName\t\t\tThe name of your new feature.\n",
+        "\tfeatureFolder\t\t\tThe folder location that you want the files generated in.\n",
         "\t-h --help\t\t\tPrint command help.\n",
         "\t-v --version\t\t\tPrint command help.\n",
         "\t--template <template>\t\tThe template structure you would like use for generation.\n\n"

@@ -17,10 +17,10 @@ switch(args.status) {
     case RFG_STATUS.GO:
         switch(dispatch((args.argv))){
             case RFG_STATUS.GO: 
-                console.log("SUCCESS")
+                console.log(`Exit Status ${RFG_STATUS.GO}`)
                 break;
             case RFG_STATUS.ERROR: 
-                console.log("FAILURE")
+                console.log(`Exit Status ${RFG_STATUS.ERROR}`)
                 break;
             }
         process.exit(0);

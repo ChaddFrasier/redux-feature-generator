@@ -12,7 +12,14 @@ const templates = [
 ]
 
 export const dispatch = (args: any): RFG_STATUS => {
-    const projectDirectory = process.cwd() + "/src/features";
+    let projectDirectory;
+    if(args.length === 3) {
+        projectDirectory = args[1]
+    } else if(args.length === 2 && fs.existsSync(args[1])) {
+        projectDirectory = args[1]
+    } else {
+        projectDirectory = process.cwd() + "/src/features";
+    }
 
     
     const outFiles = [

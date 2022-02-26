@@ -27,7 +27,7 @@ describe("Testing Argument Types", () => {
 
 describe("Testing Command Handler", () => { 
     it("Should fail when argv is an incorrect length", ()=>{
-        expect(rfgArgs.read(helpers.injectCommand("generate-feature namehere -t template extra stuff that should fail")).status).toBe(RFG_STATUS.ERROR);
+        expect(rfgArgs.read(helpers.injectCommand("generate-feature namehere -t template extra stuff that should fail regularly")).status).toBe(RFG_STATUS.ERROR);
         expect(rfgArgs.read([]).status).toBe(RFG_STATUS.ERROR);
     });
 
@@ -35,15 +35,17 @@ describe("Testing Command Handler", () => {
         expect(rfgArgs.read(helpers.injectCommand("generate-feature customName")).status).toBe(RFG_STATUS.GO);
         expect(rfgArgs.read(helpers.injectCommand("generate-feature customName -t redux-typescript")).status).toBe(RFG_STATUS.GO);
         expect(rfgArgs.read(helpers.injectCommand("generate-feature customName -t redux-javascript")).status).toBe(RFG_STATUS.GO);
+        expect(rfgArgs.read(helpers.injectCommand("generate-feature customName ./test/src/features -t redux-javascript")).status).toBe(RFG_STATUS.GO);
     });
 
     it("Should fail when argv has wrong flag in input", ()=>{
-        expect(rfgArgs.read(helpers.injectCommand("generate-feature customName -z should-fail")).status).toBe(RFG_STATUS.ERROR);
+        expect(rfgArgs.read(helpers.injectCommand("generate-feature customName -z should-fail")).status).toBe(RFG_STATUS.UNKNOWNFLAGERROR);
         expect(rfgArgs.read(helpers.injectCommand("generate-feature customName -t should-fail")).status).toBe(RFG_STATUS.ERROR);
     });
 
-    it("Should fail when argv has wrong flag in input", ()=>{
-        expect(rfgArgs.read(helpers.injectCommand("generate-feature customName should-fail")).status).toBe(RFG_STATUS.ERROR);
+    it("Should fail when argv has incorrect path for position 2", ()=>{
+        expect(rfgArgs.read(helpers.injectCommand("generate-feature customName should-fail")).status).toBe(RFG_STATUS.FOLDERNOTFOUND);
+        expect(rfgArgs.read(helpers.injectCommand("generate-feature customName ./american")).status).toBe(RFG_STATUS.FOLDERNOTFOUND);
     });
 });
 
