@@ -85,6 +85,7 @@ const generateHelp = () => {
     helpString = helpString.concat(
         "\tUsage:\t\tgenerate-feature <featureName> [--template redux-typescript]\n\n",
         "\tcustomeName\t\t\tThe name of your new feature.\n",
+        "\tfeatureFolder\t\t\tThe folder location that you want the files generated in.\n",
         "\t-h --help\t\t\tPrint command help.\n",
         "\t-v --version\t\t\tPrint command help.\n",
         "\t--template <template>\t\tThe template structure you would like use for generation.\n\n"

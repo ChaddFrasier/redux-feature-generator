@@ -23,7 +23,7 @@ Writing File: C:\Users\chadd\Documents\VSCode\Apps\pie2\src\features\myfeature\m
 ```
 
 ## Stable Releases
-* 1.3.0         Added the ability to pass a folder path to the program to generate the files in a specified path
+* 1.3.1         Added the ability to pass a folder path to the program to generate the files in a specified path
 * 1.2.4         Added testing to code with no major changes to functionality
 * 1.1.1         Code refactor patch level added unit tests
 * 1.1.0         Added version command option for testing install
