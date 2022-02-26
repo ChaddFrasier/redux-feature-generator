@@ -22,11 +22,19 @@ Writing File: C:\Users\chadd\Documents\VSCode\Apps\pie2\src\features\myfeature\m
 ```
 
 ## Stable Releases
-* 1.2.0         Added testing to code with no major changes to functionality
+* 1.2.4         Added testing to code with no major changes to functionality
 * 1.1.1         Code refactor patch level added unit tests
 * 1.1.0         Added version command option for testing install
 * 1.0.1         First working global CLI implementation; bug fixes
 
 ## Testing Releases
-* 0.1.1-rc.3  Command line argument parsing done by hand
+* 0.1.1-rc.3  Command line argument parsing done manually
 * 0.0.3       Hello World
+
+## Contribute
+This project is open-source and can be contributed to by creating a PR on the GitHub page. Follow the instructions there for submitting a PR.
+
+## Running Tests
+You will need to run and write tests for any unit you add to the code base.
+
+`yarn test`
