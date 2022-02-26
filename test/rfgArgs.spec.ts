@@ -46,3 +46,13 @@ describe("Testing Command Handler", () => {
         expect(rfgArgs.read(helpers.injectCommand("generate-feature customName should-fail")).status).toBe(RFG_STATUS.ERROR);
     });
 });
+
+describe("Testing command output", ()=>{
+    it("Should return the current version", ()=>{
+        const cfg = require('../package.json')
+        expect(typeof rfgArgs.version(helpers.injectCommand("generate-feature -v"))).toBe("string")
+        expect(
+             /^(v)(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)$/.test(rfgArgs.version(cfg))
+             ).toBeTruthy();
+    });
+});

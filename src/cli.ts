@@ -1,8 +1,4 @@
 #!/usr/bin/env node
-import  * as fs from 'fs';
-import path from 'path';
-import { capitalize, lowercase, replaceAll } from "./lib/helpers";
-
 import { dispatch } from './lib/rfg';
 import { rfgArgs, RFG_STATUS } from './lib/rfgArgs';
 
