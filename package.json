@@ -16,6 +16,8 @@
   ],
   "scripts": {
     "test": "jest",
+    "test:path:gen": "node ./build/src/cli.js newFeature ./test/src/features",
+    "test:cwd:gen": "node ./build/src/cli.js newFeature",
     "build": "gulp",
     "build:test": "yarn build && yarn test",
     "start": "node ./build/src/cli.js"
