@@ -31,31 +31,29 @@ export const dispatch = (args: any): RFG_STATUS => {
     ]
 
     // Test to see if there is a src/features folder in the project directory
-
-        // if there is a src/features pass and generate athe feature code
-        // otherwise fail and explain why the failure happened 
-
-        if(fs.existsSync(projectDirectory)) {
-            for(let i = 0; i < templates.length; i++) {
-                if(fs.existsSync(path.resolve(templates[i]))) {
-                    let fileBuf = fs.readFileSync(templates[i], {encoding: "utf-8"})
-        
-                    fileBuf = replaceAll(
-                        replaceAll(fileBuf, "${featureNameUppercase}", capitalize(args[0])),
-                        "${featureNameLowercase}", args[0])
-                    // Make sure the generation will work
-                    if(!fs.existsSync(path.join(`${projectDirectory}/${args[0]}/`))) {
-                        fs.mkdirSync(path.join(`${projectDirectory}/${args[0]}/`));
-                        process.stdout.write(`Writing File: ${outFiles[i]}\n`)
-                        fs.writeFileSync(outFiles[i], fileBuf, {encoding: "utf-8", flag: "w+"});
-                    } else {
-                        process.stdout.write(`Writing File: ${outFiles[i]}\n`)
-                        fs.writeFileSync(outFiles[i], fileBuf, {encoding: "utf-8", flag: "w+"});
-                    }
+    if(fs.existsSync(projectDirectory)) {
+        for(let i = 0; i < templates.length; i++) {
+            if(fs.existsSync(path.resolve(templates[i]))) {
+                let fileBuf = fs.readFileSync(templates[i], {encoding: "utf-8"})
+    
+                fileBuf = replaceAll(
+                    replaceAll(fileBuf, "${featureNameUppercase}", capitalize(args[0])),
+                    "${featureNameLowercase}", args[0])
+                // Make sure the generation will work
+                if(!fs.existsSync(path.join(`${projectDirectory}/${args[0]}/`))) {
+                    fs.mkdirSync(path.join(`${projectDirectory}/${args[0]}/`));
+                    process.stdout.write(`Writing File: ${outFiles[i]}\n`)
+                    fs.writeFileSync(outFiles[i], fileBuf, {encoding: "utf-8", flag: "w+"});
+                } else {
+                    process.stdout.write(`Writing File: ${outFiles[i]}\n`)
+                    fs.writeFileSync(outFiles[i], fileBuf, {encoding: "utf-8", flag: "w+"});
                 }
             }
-            process.stdout.write("Generation Succeeded\n")
         }
+        process.stdout.write("Generation Succeeded\n")
+    } else {
+        return RFG_STATUS.FOLDERNOTFOUND;
+    }
 
     return RFG_STATUS.GO
 };

@@ -12,7 +12,7 @@ switch(args.status) {
         console.log(rfgArgs.version(require("../../package.json")));
         process.exit(0);
     case RFG_STATUS.ERROR:
-        console.log(`Argument Error:\n ${rfgArgs.help()}`);
+        console.log(`\n${rfgArgs.help()}`);
         process.exit(2);
     case RFG_STATUS.GO:
         switch(dispatch((args.argv))){
@@ -21,6 +21,9 @@ switch(args.status) {
                 break;
             case RFG_STATUS.ERROR: 
                 console.log(`Exit Status ${RFG_STATUS.ERROR}`)
+                break;
+            case RFG_STATUS.FOLDERNOTFOUND: 
+                console.log(`Exit Status ${RFG_STATUS.ERROR}\nCould not find target folder for generation`)
                 break;
             }
         process.exit(0);
