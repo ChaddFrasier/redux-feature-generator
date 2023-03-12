@@ -99,6 +99,8 @@ const readArgs = (argv: string[]): ArgumentPayload => {
                         default:
                             return createStatusPayload(RFG_STATUS.UNKNOWN_FLAG_ERROR, "Error: Unknown Command Provided")
                     }
+                } else {
+                    return createStatusPayload(RFG_STATUS.UNKNOWN_ERROR, "Error: Unknown Command Provided")
                 }
                 break;
         }

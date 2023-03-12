@@ -1,6 +1,8 @@
 import { rfgArgs, RFG_STATUS } from "../src/lib/rfgArgs"
 import { helpers } from "./testhelpers"
 
+const CURRENT_BUILD_VERSION = "1.4.0";
+
 describe("Arguments Object Doesn't Blowup", () => {
     test("Should not be undefined", ()=>{
         expect(rfgArgs).toBeDefined()
@@ -54,5 +56,14 @@ describe("Testing Command Handler", () => {
         expect(rfgArgs.read(helpers.injectCommand("generate-feature custom.Name -t redux-javascript")).status).toBe(RFG_STATUS.FEATURE_NAMING_ERROR);
         expect(rfgArgs.read(helpers.injectCommand("generate-feature custom%Name -t redux-javascript")).status).toBe(RFG_STATUS.FEATURE_NAMING_ERROR);
         expect(rfgArgs.read(helpers.injectCommand("generate-feature customName/ -t redux-javascript")).status).toBe(RFG_STATUS.FEATURE_NAMING_ERROR);
+        expect(rfgArgs.read(helpers.injectCommand("generate-feature customName ./src/features hehujhesdufi")).status).toBe(RFG_STATUS.UNKNOWN_ERROR);
+    });
+
+    test("Should return a valid run when searching for help and version", ()=>{
+        expect(rfgArgs.read(helpers.injectCommand("generate-feature -v")).status).toBe(RFG_STATUS.VERSION);
+        expect(rfgArgs.read(helpers.injectCommand("generate-feature --version")).status).toBe(RFG_STATUS.VERSION);
+        expect(rfgArgs.version(require("../package.json"))).toBe(`v${CURRENT_BUILD_VERSION}`);
+        expect(rfgArgs.read(helpers.injectCommand("generate-feature -h")).status).toBe(RFG_STATUS.HELP);
+        expect(rfgArgs.read(helpers.injectCommand("generate-feature --help")).status).toBe(RFG_STATUS.HELP);
     });
 });
