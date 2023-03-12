@@ -1,12 +1,14 @@
 /**
- * TODO
+ * @file rfgArgs.ts
+ * @version 1.4.0
+ * @fileoverview Redux Feature Generator (RFG) Argument Processor is used to process and verify any cli user input and return a command status.
  */
 import { existsSync } from 'fs'
-import path from 'path';
+import { join } from 'path';
 import { validName } from './helpers';
 
 /**
- * TODO
+ * Simple status enumeration of the all feature generator commands
  */
 export enum RFG_STATUS {
     OK=0,
@@ -19,28 +21,36 @@ export enum RFG_STATUS {
     FOLDER_NOT_FOUND_ERROR, 
 };
 /**
- * TODO
+ * Argument Payload used to group cli command data
  */
 export declare type ArgumentPayload = {
     status: RFG_STATUS,
     argv: string[]
 };
 
+/**
+ * Self explanatory
+ */
 const MAX_ARGUMENT_LIMIT = 4
 
 /**
- * TODO
- * @param argv 
- * @returns 
+ * Main cli argument handler
+ * @param argv list of args from the cli
+ * @returns ArgumentPayload
  */
 const readArgs = (argv: string[]): ArgumentPayload => {
-    let readStatus: RFG_STATUS = RFG_STATUS.UNKNOWN_ERROR;
+    // Keep track of the status
+    let commandPayload: ArgumentPayload = {
+        status: RFG_STATUS.UNKNOWN_ERROR,
+        argv: []
+    }
+    
+    // Types of templates allowed
     const templateTypesArr = [
         "redux-typescript",
         "redux-javascript"
     ];
-    const argsArr: string[] = [];
-
+    
     /**
      * Fail on incorrect length of argv
      */
@@ -48,7 +58,11 @@ const readArgs = (argv: string[]): ArgumentPayload => {
         return createStatusPayload(RFG_STATUS.ERROR, "Error: Incorrect Amount of Arguments")
     }
     
-    for ( let index = 0; index < argv.length; index++ ) {
+    /**
+     * For each argument given on cli
+     */
+    for ( let index = 0; index < argv.length; index++ )
+    {
         const cliArgListItem = argv[index];
         let isOption = false;
 
@@ -59,28 +73,28 @@ const readArgs = (argv: string[]): ArgumentPayload => {
 
         switch(index)
         {
-            case 0:
+            case 0: // Check that first argument is a valid name
                 if(!isOption) {
                     if(validName(cliArgListItem)) {
-                        argsArr[index] = cliArgListItem;
-                        readStatus = RFG_STATUS.OK
+                        commandPayload.argv[index] = cliArgListItem;
+                        commandPayload.status = RFG_STATUS.OK
                         break;
                     } else {
                         return createStatusPayload(RFG_STATUS.FEATURE_NAMING_ERROR, "Naming Error: The feature name must be valid for a variable in your code")
                     }
-                }
-            case 1:
+                } // else Pass and handle in default
+            case 1: // Check that second argument is a valid path
                 if(!isOption) {
-                    if(existsSync(path.join(cliArgListItem))) {
-                        argsArr[index] = cliArgListItem;
-                        readStatus = RFG_STATUS.OK
+                    if(existsSync(join(cliArgListItem))) {
+                        commandPayload.argv[index] = cliArgListItem;
+                        commandPayload.status = RFG_STATUS.OK
                         break;
                     } else {
                         return createStatusPayload(RFG_STATUS.FOLDER_NOT_FOUND_ERROR, "Folder Path Error: The folder must exist to generate the features")
                     }
-                }
+                }  // else Pass and handle in default
             default:
-                if(isOption){
+                if(isOption){ // Handle arguments or unknown cases
                     switch(cliArgListItem){
                         case "-h":
                         case "--help":
@@ -91,7 +105,7 @@ const readArgs = (argv: string[]): ArgumentPayload => {
                         case "-t":
                         case "--template":
                             if(templateTypesArr.includes(argv[++index])){
-                                argsArr[1] = argv[index];
+                                commandPayload.argv[1] = argv[index];
                             } else {
                                 return createStatusPayload(RFG_STATUS.ERROR, `Argument Error: Invalid template pattern attempted please provide one of the options seen here [${templateTypesArr}]`);
                             }
@@ -105,17 +119,14 @@ const readArgs = (argv: string[]): ArgumentPayload => {
                 break;
         }
     }
-    return {
-        status: readStatus,
-        argv: argsArr
-    };
+    return commandPayload;
 };
 
 /**
- * TODO
- * @returns 
+ * Builds and returns help text
+ * @returns {string} The help text that should be printed to console
  */
-const generateHelp = () => {
+const generateHelp = (): string => {
     let helpString = "redux-feature-generator:\t\tA simple command line tool to speed up the time it takes to setup a new redux feature.\n\n";
     helpString = helpString.concat(
         "\tUsage:\tgenerate-feature <featureName> <generationPath> [--template redux-typescript]\n\n",
@@ -133,19 +144,26 @@ const generateHelp = () => {
 };
 
 /**
- * TODO
+ * Retrieve the version string from the config file
  * @param cfg 
  * @returns 
  */
-const getVer = (cfg: any): string => {
-    return `v${cfg.version}`;
+const getVersion = (cfg: any): string | undefined => {
+    if(cfg !== undefined){
+        try{
+            const rfgVersion = `v${cfg.version}`;
+            return rfgVersion
+        } catch(e){
+            return undefined
+        }
+    }
 };
 
 /**
- * TODO
- * @param status 
- * @param message 
- * @returns 
+ * Create the payload to return to the cli functions
+ * @param status {RFG_STATUS} the status of the command
+ * @param message {string | undefined} if a message must be printed, include it here
+ * @returns ArgumentPayload
  */
 const createStatusPayload = (status: RFG_STATUS, message?: string): ArgumentPayload => {
     if(message){
@@ -158,10 +176,10 @@ const createStatusPayload = (status: RFG_STATUS, message?: string): ArgumentPayl
 }
 
 /**
- * TODO
+ * API
  */
-export const rfgArgs = {
-    read: readArgs,
-    help: generateHelp,
-    version: getVer
+export const rfgApi = {
+    processCommand: readArgs,
+    getHelp: generateHelp,
+    getVersion: getVersion
 };

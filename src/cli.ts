@@ -2,27 +2,27 @@
 /**
  * @file cli.ts
  * @version 1.4.0
- * @fileoverview Main file for handling the commands from the user
+ * @fileoverview Main file for handling the commands
  */
-import { dispatch } from './lib/rfg';
-import { rfgArgs, RFG_STATUS } from './lib/rfgArgs';
+import { generateFiles } from './lib/rfg';
+import { rfgApi, RFG_STATUS } from './lib/rfgArgs';
 
 // Read Arguments from the user
-const args = rfgArgs.read(process.argv.splice(process.execArgv.length + 2));
+const rfgCommandObj = rfgApi.processCommand(process.argv.splice(process.execArgv.length + 2));
 
 // Handle the status of the read attempt
-switch(args.status) {
+switch(rfgCommandObj.status) {
     case RFG_STATUS.HELP:
-        console.log(rfgArgs.help());
+        console.log(rfgApi.getHelp());
         process.exit(0);
     case RFG_STATUS.VERSION:
-        console.log(rfgArgs.version(require("../../package.json")));
+        console.log(rfgApi.getVersion(require("../../package.json")));
         process.exit(0);
     case RFG_STATUS.ERROR:
-        console.log(`\n${rfgArgs.help()}\n\n`);
+        console.log(`\n${rfgApi.getHelp()}\n\n`);
         process.exit(2);
     case RFG_STATUS.OK:
-        const cmdStatus = dispatch((args.argv));
+        const cmdStatus = generateFiles((rfgCommandObj.argv));
         switch(cmdStatus){
             case RFG_STATUS.OK: 
                 console.log(`Exit Status ${cmdStatus}\n\n`)
@@ -36,5 +36,5 @@ switch(args.status) {
             }
         process.exit(cmdStatus);
     default:
-        process.exit(args.status);
+        process.exit(rfgCommandObj.status);
 }

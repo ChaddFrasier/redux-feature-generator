@@ -1,3 +1,8 @@
+/**
+ * @file rfg.ts
+ * @version 1.4.0
+ * @fileoverview Redux Feature Generator (RFG) is used create the template files.
+ */
 import { join, resolve } from "path";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { RFG_STATUS } from "./rfgArgs";
@@ -11,7 +16,7 @@ const templates = [
     resolve(__dirname, "../../templates/basic-typescript/templateSlice.ts.tpl")
 ]
 
-export const dispatch = (args: any): RFG_STATUS =>
+export const generateFiles = (args: string[]): RFG_STATUS =>
 {
     let projectDirectory;
 
@@ -57,7 +62,7 @@ export const dispatch = (args: any): RFG_STATUS =>
             }
         }
         process.stdout.write("Generation Succeeded\n")
-    } else {
+    } else { // Valid Feature Folder must be found to attempt generation
         return RFG_STATUS.FOLDER_NOT_FOUND_ERROR;
     }
 
