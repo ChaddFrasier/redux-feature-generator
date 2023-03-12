@@ -118,7 +118,11 @@ const readArgs = (argv: string[]): ArgumentPayload => {
 const generateHelp = () => {
     let helpString = "redux-feature-generator:\t\tA simple command line tool to speed up the time it takes to setup a new redux feature.\n\n";
     helpString = helpString.concat(
-        "\tUsage:\t\tgenerate-feature <featureName> [--template redux-typescript]\n\n",
+        "\tUsage:\tgenerate-feature <featureName> <generationPath> [--template redux-typescript]\n\n",
+        "\tExample:\n",
+        "\t\tgenerate-feature <featureName>\n",
+        "\t\tgenerate-feature <featureName> <generationPath>\n",
+        "\t\tgenerate-feature <featureName> <generationPath> -t <template>\n\n",
         "\tcustomName\t\t\tThe name of your new feature.\n",
         "\tfeatureFolder\t\t\tThe folder location that you want the files generated in.\n",
         "\t-h --help\t\t\tPrint command help.\n",
