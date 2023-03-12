@@ -2,6 +2,7 @@ import { rfgApi, RFG_STATUS } from "../src/lib/rfgArgs"
 import { helpers } from "./testhelpers"
 
 const CURRENT_BUILD_VERSION = "1.4.0";
+const generationTestPath = "./tests/src/features";
 
 describe("Arguments Object Doesn't Blowup", () => {
     test("Should not be undefined", ()=>{
@@ -37,7 +38,7 @@ describe("Testing Command Handler", () => {
         expect(rfgApi.processCommand(helpers.injectCommand("generate-feature customName")).status).toBe(RFG_STATUS.OK);
         expect(rfgApi.processCommand(helpers.injectCommand("generate-feature customName -t redux-typescript")).status).toBe(RFG_STATUS.OK);
         expect(rfgApi.processCommand(helpers.injectCommand("generate-feature customName -t redux-javascript")).status).toBe(RFG_STATUS.OK);
-        expect(rfgApi.processCommand(helpers.injectCommand("generate-feature customName ./src/features -t redux-javascript")).status).toBe(RFG_STATUS.OK);
+        expect(rfgApi.processCommand(helpers.injectCommand(`generate-feature customName ${generationTestPath} -t redux-javascript`)).status).toBe(RFG_STATUS.OK);
     });
 
     test("Should fail when argv has wrong flag in input", ()=>{
@@ -56,7 +57,7 @@ describe("Testing Command Handler", () => {
         expect(rfgApi.processCommand(helpers.injectCommand("generate-feature custom.Name -t redux-javascript")).status).toBe(RFG_STATUS.FEATURE_NAMING_ERROR);
         expect(rfgApi.processCommand(helpers.injectCommand("generate-feature custom%Name -t redux-javascript")).status).toBe(RFG_STATUS.FEATURE_NAMING_ERROR);
         expect(rfgApi.processCommand(helpers.injectCommand("generate-feature customName/ -t redux-javascript")).status).toBe(RFG_STATUS.FEATURE_NAMING_ERROR);
-        expect(rfgApi.processCommand(helpers.injectCommand("generate-feature customName ./src/features hehujhesdufi")).status).toBe(RFG_STATUS.UNKNOWN_ERROR);
+        expect(rfgApi.processCommand(helpers.injectCommand(`generate-feature customName ${generationTestPath} hehujhesdufi`)).status).toBe(RFG_STATUS.UNKNOWN_ERROR);
     });
 
     test("Should return a valid run when searching for help and version", ()=>{
