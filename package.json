@@ -15,7 +15,7 @@
     "build/templates/**/*"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "jest --silent --coverage",
     "test:path:gen": "node ./build/src/cli.js newFeature ./test/src/features",
     "test:cwd:gen": "node ./build/src/cli.js newFeature",
     "build": "gulp",
