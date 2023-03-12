@@ -64,6 +64,8 @@ describe("Testing Command Handler", () => {
         expect(rfgApi.processCommand(helpers.injectCommand("generate-feature -v")).status).toBe(RFG_STATUS.VERSION);
         expect(rfgApi.processCommand(helpers.injectCommand("generate-feature --version")).status).toBe(RFG_STATUS.VERSION);
         expect(rfgApi.getVersion(require("../package.json"))).toBe(`v${CURRENT_BUILD_VERSION}`);
+        expect(rfgApi.getVersion(undefined)).toBeUndefined();
+        expect(rfgApi.getVersion({})).toBeUndefined();
         expect(rfgApi.processCommand(helpers.injectCommand("generate-feature -h")).status).toBe(RFG_STATUS.HELP);
         expect(rfgApi.processCommand(helpers.injectCommand("generate-feature --help")).status).toBe(RFG_STATUS.HELP);
     });

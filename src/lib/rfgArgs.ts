@@ -149,13 +149,9 @@ const generateHelp = (): string => {
  * @returns 
  */
 const getVersion = (cfg: any): string | undefined => {
-    if(cfg !== undefined){
-        try{
-            const rfgVersion = `v${cfg.version}`;
-            return rfgVersion
-        } catch(e){
-            return undefined
-        }
+    if(cfg !== undefined && cfg.version !== undefined){
+        const rfgVersion = `v${cfg.version}`;
+        return rfgVersion
     }
 };
 
