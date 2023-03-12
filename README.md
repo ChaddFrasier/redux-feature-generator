@@ -23,6 +23,7 @@ Writing File: C:\Users\chadd\Documents\VSCode\Apps\pie2\src\features\myfeature\m
 ```
 
 ## Stable Releases
+* 1.4.0         Improved error output to support debugging commands
 * 1.3.1         Added the ability to pass a folder path to the program to generate the files in a specified path
 * 1.2.4         Added testing to code with no major changes to functionality
 * 1.1.1         Code refactor patch level added unit tests
@@ -34,9 +35,4 @@ Writing File: C:\Users\chadd\Documents\VSCode\Apps\pie2\src\features\myfeature\m
 * 0.0.3       Hello World
 
 ## Contribute
-This project is open-source and can be contributed to by creating a PR on the GitHub page. Follow the instructions there for submitting a PR.
-
-## Running Tests
-You will need to run and write tests for any unit you add to the code base.
-
-`yarn test`
+This project is open-source and can be contributed to by creating a PR on the GitHub page. Follow the instructions there for contributing.
