@@ -1,4 +1,4 @@
-import * as helpers from "./helpers"
+import * as helpers from "../src/lib/helpers"
 
 describe("Helper.ts Tests", () => {
     test("Test that the functions are exported", () => {

@@ -1,1 +1,0 @@
-This is a placeholder file to generate the feature folder by default for a little faster workflow
