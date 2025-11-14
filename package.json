@@ -1,6 +1,6 @@
 {
   "name": "redux-feature-generator",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Generate Redux feature code from the command line",
   "keywords": [
     "redux",
@@ -32,7 +32,7 @@
   },
   "repository": "git+https://github.com/ChaddFrasier/redux-feature-generator.git",
   "author": "chaddfrasier",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ChaddFrasier/redux-feature-generator/issues"
   },
