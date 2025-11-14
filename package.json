@@ -30,7 +30,10 @@
       "build/"
     ]
   },
-  "repository": "git+https://github.com/ChaddFrasier/redux-feature-generator.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChaddFrasier/redux-feature-generator.git"
+  },
   "author": "chaddfrasier",
   "license": "MIT",
   "bugs": {
@@ -38,7 +41,7 @@
   },
   "homepage": "https://github.com/ChaddFrasier/redux-feature-generator#readme",
   "bin": {
-    "generate-feature": "./build/src/cli.js"
+    "generate-feature": "build/src/cli.js"
   },
   "preferGlobal": true,
   "devDependencies": {
