@@ -1,7 +1,7 @@
 import { rfgApi, RFG_STATUS } from "../src/lib/rfgArgs"
 import { helpers } from "./testhelpers"
 
-const CURRENT_BUILD_VERSION = "1.4.0";
+const CURRENT_BUILD_VERSION = "1.4.1";
 const generationTestPath = "./tests/src/features";
 
 describe("Arguments Object Doesn't Blowup", () => {
